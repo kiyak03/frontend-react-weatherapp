@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from './components/searchBar/SearchBar';
 import TabBarMenu from './components/tabBarMenu/TabBarMenu';
@@ -6,20 +6,28 @@ import MetricSlider from './components/metricSlider/MetricSlider';
 import './App.css';
 
 // LET OP: VOEG HIER JOUW API KEY IN
-const apiKey = '--plaats jouw API key hier!--';
+// const apiKey = '--plaats jouw API key hier!--';
+const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState('');
 
-  async function fetchData() {
-    try {
-      const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=utrecht,nl&appid=${apiKey}&lang=nl`);
-      setWeatherData(result.data);
-    } catch (e) {
-      console.error(e);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
+        setWeatherData(result.data);
+      } catch (e) {
+        console.error(e);
+      }
     }
-  }
+
+    if (location) {
+      fetchData();
+    }
+
+  }, [location]);
 
   return (
     <>
@@ -37,12 +45,6 @@ function App() {
                 <h1>{weatherData.main.temp}</h1>
               </>
             }
-            <button
-              type="button"
-              onClick={fetchData}
-            >
-              Haal data op!
-            </button>
           </span>
         </div>
 
