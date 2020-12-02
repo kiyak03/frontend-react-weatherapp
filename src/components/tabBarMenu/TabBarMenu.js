@@ -6,12 +6,12 @@ function TabBarMenu() {
     <nav className="tab-bar">
       <ul>
         <li>
-          <a className="active" href="/">
+          <a href="/">
             Vandaag
           </a>
         </li>
         <li>
-          <a href="/">
+          <a className="active" href="/">
             Komende week
           </a>
         </li>

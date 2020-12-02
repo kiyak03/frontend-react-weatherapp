@@ -8,7 +8,6 @@ import './App.css';
 
 // LET OP: VOEG HIER JOUW API KEY IN
 // const apiKey = '--plaats jouw API key hier!--';
-const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -19,6 +18,7 @@ function App() {
       try {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
         setWeatherData(result.data);
+        console.log(result.data)
       } catch (e) {
         console.error(e);
       }
@@ -54,7 +54,7 @@ function App() {
           <TabBarMenu/>
 
           <div className="tab-wrapper">
-            <ForecastTab />
+            <ForecastTab coordinates={weatherData && weatherData.coord}/>
           </div>
         </div>
 
