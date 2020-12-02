@@ -5,8 +5,8 @@ import TabBarMenu from './components/tabBarMenu/TabBarMenu';
 import MetricSlider from './components/metricSlider/MetricSlider';
 import './App.css';
 
-// VERVANG DEZE API KEY DOOR JOUW API KEY:
-const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
+// LET OP: VOEG HIER JOUW API KEY IN
+const apiKey = '--plaats jouw API key hier!--';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
