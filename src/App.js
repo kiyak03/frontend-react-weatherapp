@@ -3,6 +3,7 @@ import axios from 'axios';
 import SearchBar from './components/searchBar/SearchBar';
 import TabBarMenu from './components/tabBarMenu/TabBarMenu';
 import MetricSlider from './components/metricSlider/MetricSlider';
+import ForecastTab from './pages/forecastTab/ForecastTab';
 import './App.css';
 
 // LET OP: VOEG HIER JOUW API KEY IN
@@ -53,7 +54,7 @@ function App() {
           <TabBarMenu/>
 
           <div className="tab-wrapper">
-            Alle inhoud van de tabbladen komt hier!
+            <ForecastTab />
           </div>
         </div>
 
