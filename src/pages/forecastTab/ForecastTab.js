@@ -4,7 +4,6 @@ import axios from "axios";
 
 // LET OP: VOEG HIER JOUW API KEY IN
 // const apiKey = '--plaats jouw API key hier!--';
-const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function ForecastTab({ coordinates }) {
   const [forecasts, setForecasts] = useState(null);
