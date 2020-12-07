@@ -8,7 +8,6 @@ import './App.css';
 
 // LET OP: VOEG HIER JOUW API KEY IN
 // const apiKey = '--plaats jouw API key hier!--';
-const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
