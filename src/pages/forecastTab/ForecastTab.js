@@ -4,11 +4,11 @@ import axios from "axios";
 
 // LET OP: VOEG HIER JOUW API KEY IN
 // const apiKey = '--plaats jouw API key hier!--';
-const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function ForecastTab({ coordinates }) {
   const [forecasts, setForecasts] = useState(null);
   const [error, setError] = useState(false);
+  const [loading, toggleLoading] = useState(false);
 
   function createDateString(timestamp) {
     const day = new Date(timestamp * 1000);
@@ -18,13 +18,16 @@ function ForecastTab({ coordinates }) {
   useEffect(() => {
     async function fetchData() {
       setError(false);
+      toggleLoading(true);
 
       try {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates?.lat}&lon=${coordinates?.lon}&exclude=minutely,current,hourly&appid=${apiKey}&lang=nl`);
         setForecasts(result.data.daily.slice(1, 6));
+        toggleLoading(false);
       } catch (e) {
         console.error(e);
         setError(true);
+        toggleLoading(false);
       }
     }
 
@@ -61,6 +64,8 @@ function ForecastTab({ coordinates }) {
       )}
 
       {error && <span>Er is iets misgegaan met het ophalen van de data.</span>}
+
+      {loading && (<span>Loading...</span>)}
     </div>
   );
 };

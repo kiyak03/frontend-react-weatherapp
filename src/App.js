@@ -13,17 +13,22 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState('');
   const [error, setError] = useState(false);
+  const [loading, toggleLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      setError(false)
+      setError(false);
+      toggleLoading(true);
+
       try {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
         setWeatherData(result.data);
         console.log(result.data);
+        toggleLoading(false);
       } catch (e) {
         console.error(e);
         setError(true);
+        toggleLoading(false);
       }
     }
 
@@ -48,6 +53,8 @@ function App() {
           )}
 
           <span className="location-details">
+            {loading && (<span>Loading...</span>)}
+
             {weatherData &&
             <>
               <h2>{weatherData.weather[0].description}</h2>
