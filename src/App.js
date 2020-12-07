@@ -8,19 +8,23 @@ import './App.css';
 
 // LET OP: VOEG HIER JOUW API KEY IN
 // const apiKey = '--plaats jouw API key hier!--';
+const apiKey = 'd85e6256cb39361faf2b9dacc4eb33f4';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [location, setLocation] = useState('');
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
+      setError(false)
       try {
         const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
         setWeatherData(result.data);
-        console.log(result.data)
+        console.log(result.data);
       } catch (e) {
         console.error(e);
+        setError(true);
       }
     }
 
@@ -36,15 +40,21 @@ function App() {
 
         {/*HEADER -------------------- */}
         <div className="weather-header">
-          <SearchBar setLocationHandler={setLocation} />
+          <SearchBar setLocationHandler={setLocation}/>
+
+          {error && (
+            <span className="wrong-location-error">
+              Oeps! Deze locatie bestaat niet
+            </span>
+          )}
 
           <span className="location-details">
             {weatherData &&
-              <>
-                <h2>{weatherData.weather[0].description}</h2>
-                <h3>{weatherData.name}</h3>
-                <h1>{weatherData.main.temp}</h1>
-              </>
+            <>
+              <h2>{weatherData.weather[0].description}</h2>
+              <h3>{weatherData.name}</h3>
+              <h1>{weatherData.main.temp}</h1>
+            </>
             }
           </span>
         </div>
